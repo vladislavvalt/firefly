@@ -12,6 +12,10 @@ class MainFrame(Frame):
         if self.controller is not None:
             self.controller.reset_callback()
 
+    def draw_button_callback(self, event):
+        if self.controller is not None:
+            self.controller.draw_callback()
+
     def init_ui(self):
         # build top menu
         self.top_menu = Frame(self)
@@ -27,9 +31,13 @@ class MainFrame(Frame):
             current_container.param_label = Label(current_container, text=p)
             current_container.param_label.pack(padx=2, pady=2)
 
-            current_container.param_input = Entry(current_container, width=10)
+            current_container.param_input = Entry(current_container, width=6)
             current_container.param_input.insert(0, self.params[p])
             current_container.param_input.pack(padx=2, pady=2)
+
+        self.start_button = Button(self.top_menu, text="Draw")
+        self.start_button.pack(side=RIGHT)
+        self.start_button.bind('<Button-1>', self.draw_button_callback)
 
         self.reset_button = Button(self.top_menu, text="Reset")
         self.reset_button.pack(side=RIGHT)
@@ -85,8 +93,9 @@ class MainFrame(Frame):
 
         self.start_button = None
         self.reset_button = None
+        self.draw_button = None
 
-        #console output
+        # console output
         self.bottom_console = None
         self.console = None
 
