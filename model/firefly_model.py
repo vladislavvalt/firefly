@@ -33,6 +33,10 @@ class FireflyModel:
         if output_writer is not None and isinstance(output_writer, IOutputWriter):
             self.output_writer = output_writer
 
+    def best_current_solution(self):
+        if self.current_emulation is not None and len(self.current_solutions) > 0:
+            return self.current_solutions[-1]
+
     def set_output_writer(self, output_writer):
         if output_writer is not None and isinstance(output_writer, IOutputWriter):
             self.output_writer = output_writer
